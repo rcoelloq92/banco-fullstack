@@ -1,0 +1,158 @@
+/* Estilos globales: el diseño se maqueta a mano, sin frameworks de UI. */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #333333;
+  background: #ffffff;
+}
+
+h2 {
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+
+/* Barra superior de cada página: búsqueda a la izquierda, acción a la derecha */
+.barra-acciones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.campo-busqueda {
+  flex: 0 0 320px;
+  padding: 8px 10px;
+  border: 1px solid #c9c9c9;
+  border-radius: 3px;
+}
+
+.boton-primario {
+  background: #f5c400;
+  color: #1f1f1f;
+  border: none;
+  border-radius: 3px;
+  padding: 9px 26px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.boton-primario:hover {
+  background: #e0b400;
+}
+
+.boton-secundario {
+  background: #ffffff;
+  border: 1px solid #c9c9c9;
+  border-radius: 3px;
+  padding: 8px 18px;
+  cursor: pointer;
+}
+
+.boton-enlace {
+  background: none;
+  border: none;
+  color: #1a56b0;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+
+.boton-peligro {
+  background: none;
+  border: none;
+  color: #c0392b;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+
+/* Tablas de listados */
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla th {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 2px solid #333333;
+  font-weight: 600;
+}
+
+.tabla td {
+  padding: 9px 12px;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.tabla tr:hover td {
+  background: #fafafa;
+}
+
+/* Formularios */
+.formulario {
+  max-width: 560px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+
+.formulario .fila {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.formulario label {
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.formulario input,
+.formulario select {
+  padding: 8px 10px;
+  border: 1px solid #c9c9c9;
+  border-radius: 3px;
+}
+
+.formulario .acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* Mensajes de validación y de resultado */
+.mensaje-error {
+  background: #fdecea;
+  color: #b3261e;
+  border: 1px solid #f5c6c2;
+  border-radius: 3px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+}
+
+.mensaje-exito {
+  background: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #c8e6c9;
+  border-radius: 3px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+}
+
+.error-campo {
+  color: #b3261e;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.sin-registros {
+  padding: 24px;
+  text-align: center;
+  color: #777777;
+}

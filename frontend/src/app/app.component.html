@@ -1,0 +1,19 @@
+<header class="cabecera">
+  <span class="logo">BANCO</span>
+</header>
+
+<div class="contenedor">
+  <nav class="menu-lateral">
+    <ul>
+      @for (opcion of opcionesMenu; track opcion.ruta) {
+        <li>
+          <a [routerLink]="opcion.ruta" routerLinkActive="activo">{{ opcion.etiqueta }}</a>
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <main class="contenido">
+    <router-outlet />
+  </main>
+</div>
