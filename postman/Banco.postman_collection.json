@@ -1,0 +1,716 @@
+{
+  "info": {
+    "name": "Banco API",
+    "description": "Coleccion de pruebas para la API bancaria (clientes, cuentas, movimientos y reportes). Configurar la variable base_url si el backend no corre en http://localhost:8080.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "Listar clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes"]
+            },
+            "description": "Obtiene el listado completo de clientes registrados."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener cliente por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "1"]
+            },
+            "description": "Consulta el detalle de un cliente por su id."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear cliente - Jose Lema",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Jose Lema\",\n  \"genero\": \"Masculino\",\n  \"edad\": 35,\n  \"identificacion\": \"1710034065\",\n  \"direccion\": \"Otavalo sn y principal\",\n  \"telefono\": \"098254785\",\n  \"clienteId\": \"jlema\",\n  \"contrasena\": \"1234\",\n  \"estado\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes"]
+            },
+            "description": "Crea el cliente Jose Lema (caso 1 del enunciado)."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear cliente - Marianela Montalvo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Marianela Montalvo\",\n  \"genero\": \"Femenino\",\n  \"edad\": 30,\n  \"identificacion\": \"2250974585\",\n  \"direccion\": \"Amazonas y NNUU\",\n  \"telefono\": \"097548965\",\n  \"clienteId\": \"mmontalvo\",\n  \"contrasena\": \"5678\",\n  \"estado\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes"]
+            },
+            "description": "Crea la cliente Marianela Montalvo (caso 1 del enunciado)."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear cliente - Juan Osorio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Juan Osorio\",\n  \"genero\": \"Masculino\",\n  \"edad\": 28,\n  \"identificacion\": \"0998745871\",\n  \"direccion\": \"13 junio y Equinoccial\",\n  \"telefono\": \"098874587\",\n  \"clienteId\": \"josorio\",\n  \"contrasena\": \"1245\",\n  \"estado\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clientes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes"]
+            },
+            "description": "Crea el cliente Juan Osorio (caso 1 del enunciado)."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar cliente (PUT)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Jose Lema\",\n  \"genero\": \"Masculino\",\n  \"edad\": 35,\n  \"identificacion\": \"1710034065\",\n  \"direccion\": \"Otavalo sn y principal\",\n  \"telefono\": \"099999999\",\n  \"clienteId\": \"jlema\",\n  \"contrasena\": \"1234\",\n  \"estado\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clientes/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "1"]
+            },
+            "description": "Actualizacion completa del cliente 1: mismo cuerpo con el telefono cambiado."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar cliente parcial (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/clientes/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "1"]
+            },
+            "description": "Actualizacion parcial del cliente 1: solo cambia el estado."
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar cliente",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/clientes/3",
+              "host": ["{{base_url}}"],
+              "path": ["api", "clientes", "3"]
+            },
+            "description": "Elimina el cliente con id 3."
+          },
+          "response": []
+        }
+      ],
+      "description": "CRUD del recurso clientes (/api/clientes)."
+    },
+    {
+      "name": "Cuentas",
+      "item": [
+        {
+          "name": "Listar cuentas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/cuentas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cuentas"]
+            },
+            "description": "Obtiene el listado completo de cuentas."
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener cuenta por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/cuentas/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cuentas", "1"]
+            },
+            "description": "Consulta el detalle de una cuenta por su id."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear cuenta 478758 AHORRO - Jose Lema",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"478758\",\n  \"tipoCuenta\": \"AHORRO\",\n  \"saldoInicial\": 2000,\n  \"estado\": true,\n  \"clienteId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cuentas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cuentas"]
+            },
+            "description": "Cuenta de ahorro 478758 con saldo inicial 2000 para Jose Lema (caso 2 del enunciado)."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear cuenta 225487 CORRIENTE - Marianela Montalvo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"225487\",\n  \"tipoCuenta\": \"CORRIENTE\",\n  \"saldoInicial\": 100,\n  \"estado\": true,\n  \"clienteId\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cuentas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cuentas"]
+            },
+            "description": "Cuenta corriente 225487 con saldo inicial 100 para Marianela Montalvo (caso 2 del enunciado)."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear cuenta 495878 AHORRO - Juan Osorio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"495878\",\n  \"tipoCuenta\": \"AHORRO\",\n  \"saldoInicial\": 0,\n  \"estado\": true,\n  \"clienteId\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cuentas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cuentas"]
+            },
+            "description": "Cuenta de ahorro 495878 con saldo inicial 0 para Juan Osorio (caso 2 del enunciado)."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear cuenta 496825 AHORRO - Marianela Montalvo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"496825\",\n  \"tipoCuenta\": \"AHORRO\",\n  \"saldoInicial\": 540,\n  \"estado\": true,\n  \"clienteId\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cuentas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cuentas"]
+            },
+            "description": "Cuenta de ahorro 496825 con saldo inicial 540 para Marianela Montalvo (caso 2 del enunciado)."
+          },
+          "response": []
+        },
+        {
+          "name": "Crear cuenta 585545 CORRIENTE - Jose Lema",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"585545\",\n  \"tipoCuenta\": \"CORRIENTE\",\n  \"saldoInicial\": 1000,\n  \"estado\": true,\n  \"clienteId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cuentas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cuentas"]
+            },
+            "description": "Nueva cuenta corriente 585545 con saldo inicial 1000 para Jose Lema (caso 3 del enunciado)."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar cuenta (PUT)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"478758\",\n  \"tipoCuenta\": \"AHORRO\",\n  \"saldoInicial\": 2000,\n  \"estado\": true,\n  \"clienteId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cuentas/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cuentas", "1"]
+            },
+            "description": "Actualizacion completa de la cuenta con id 1."
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar cuenta parcial (PATCH)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/cuentas/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cuentas", "1"]
+            },
+            "description": "Actualizacion parcial de la cuenta 1: solo cambia el estado."
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar cuenta",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/cuentas/5",
+              "host": ["{{base_url}}"],
+              "path": ["api", "cuentas", "5"]
+            },
+            "description": "Elimina la cuenta con id 5."
+          },
+          "response": []
+        }
+      ],
+      "description": "CRUD del recurso cuentas (/api/cuentas)."
+    },
+    {
+      "name": "Movimientos",
+      "item": [
+        {
+          "name": "Listar movimientos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/movimientos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "movimientos"]
+            },
+            "description": "Obtiene el listado completo de movimientos registrados."
+          },
+          "response": []
+        },
+        {
+          "name": "Retiro de 575 - cuenta 478758",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"478758\",\n  \"tipoMovimiento\": \"DEBITO\",\n  \"valor\": 575\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/movimientos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "movimientos"]
+            },
+            "description": "Caso 4 del enunciado: retiro de 575 de la cuenta de ahorro 478758."
+          },
+          "response": []
+        },
+        {
+          "name": "Deposito de 600 - cuenta 225487",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"225487\",\n  \"tipoMovimiento\": \"CREDITO\",\n  \"valor\": 600\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/movimientos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "movimientos"]
+            },
+            "description": "Caso 5 del enunciado: deposito de 600 en la cuenta corriente 225487."
+          },
+          "response": []
+        },
+        {
+          "name": "Deposito de 150 - cuenta 495878",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"495878\",\n  \"tipoMovimiento\": \"CREDITO\",\n  \"valor\": 150\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/movimientos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "movimientos"]
+            },
+            "description": "Caso 6 del enunciado: deposito de 150 en la cuenta de ahorro 495878."
+          },
+          "response": []
+        },
+        {
+          "name": "Retiro de 540 - cuenta 496825",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"496825\",\n  \"tipoMovimiento\": \"DEBITO\",\n  \"valor\": 540\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/movimientos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "movimientos"]
+            },
+            "description": "Caso 7 del enunciado: retiro de 540 de la cuenta de ahorro 496825."
+          },
+          "response": []
+        },
+        {
+          "name": "Error - Saldo no disponible",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"495878\",\n  \"tipoMovimiento\": \"DEBITO\",\n  \"valor\": 9999\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/movimientos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "movimientos"]
+            },
+            "description": "Caso de error: debito mayor al saldo de la cuenta 495878; debe responder 'Saldo no disponible'."
+          },
+          "response": []
+        },
+        {
+          "name": "Error - Cupo diario Excedido",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"478758\",\n  \"tipoMovimiento\": \"DEBITO\",\n  \"valor\": 1200\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/movimientos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "movimientos"]
+            },
+            "description": "Caso de error: debito de 1200 que supera el limite diario de retiro; debe responder 'Cupo diario Excedido'."
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar movimiento",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/movimientos/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "movimientos", "1"]
+            },
+            "description": "Elimina el movimiento con id 1 (reversa la transaccion registrada)."
+          },
+          "response": []
+        }
+      ],
+      "description": "Registro y consulta de movimientos (/api/movimientos), incluye casos de error del enunciado."
+    },
+    {
+      "name": "Reportes",
+      "item": [
+        {
+          "name": "Estado de cuenta (JSON)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reportes?clienteId=2&fechaInicio=2026-10-01&fechaFin=2026-10-31",
+              "host": ["{{base_url}}"],
+              "path": ["api", "reportes"],
+              "query": [
+                {
+                  "key": "clienteId",
+                  "value": "2"
+                },
+                {
+                  "key": "fechaInicio",
+                  "value": "2026-10-01"
+                },
+                {
+                  "key": "fechaFin",
+                  "value": "2026-10-31"
+                }
+              ]
+            },
+            "description": "Estado de cuenta en JSON del cliente 2 en el rango de fechas indicado."
+          },
+          "response": []
+        },
+        {
+          "name": "Estado de cuenta (PDF base64)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reportes?clienteId=2&fechaInicio=2026-10-01&fechaFin=2026-10-31&formato=pdf",
+              "host": ["{{base_url}}"],
+              "path": ["api", "reportes"],
+              "query": [
+                {
+                  "key": "clienteId",
+                  "value": "2"
+                },
+                {
+                  "key": "fechaInicio",
+                  "value": "2026-10-01"
+                },
+                {
+                  "key": "fechaFin",
+                  "value": "2026-10-31"
+                },
+                {
+                  "key": "formato",
+                  "value": "pdf"
+                }
+              ]
+            },
+            "description": "Mismo estado de cuenta pero con formato=pdf: la respuesta incluye el campo pdfBase64 con el documento."
+          },
+          "response": []
+        }
+      ],
+      "description": "Reporte de estado de cuenta por cliente y rango de fechas (/api/reportes)."
+    }
+  ]
+}

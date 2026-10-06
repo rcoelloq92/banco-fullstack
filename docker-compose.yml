@@ -1,0 +1,40 @@
+services:
+
+  # Base de datos PostgreSQL con script inicial
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: banco
+      POSTGRES_USER: banco
+      POSTGRES_PASSWORD: banco123
+    volumes:
+      # Se ejecuta automáticamente al crear la BD por primera vez
+      - ./BaseDatos.sql:/docker-entrypoint-initdb.d/BaseDatos.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U banco -d banco"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # API Spring Boot
+  backend:
+    build: ./backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/banco
+      DB_USER: banco
+      DB_PASSWORD: banco123
+      # Spring mapea esta variable a aplicacion.cors.origenes-permitidos
+      APLICACION_CORS_ORIGENESPERMITIDOS: http://localhost
+    ports:
+      - "8080:8080"
+
+  # Frontend Angular servido por nginx (proxy /api/ -> backend)
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "80:80"

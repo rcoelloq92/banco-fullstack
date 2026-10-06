@@ -1,0 +1,10 @@
+# Artefactos de compilación local (la imagen compila desde cero)
+target/
+
+# Control de versiones e IDE
+.git/
+.gitignore
+*.iml
+.idea/
+
+# Nota: se mantiene .mvn/wrapper por si se usa el wrapper dentro del build
