@@ -1,0 +1,15 @@
+# Configuración de pruebas: H2 en memoria en modo PostgreSQL
+spring:
+  datasource:
+    url: jdbc:h2:mem:banco;MODE=PostgreSQL
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+
+aplicacion:
+  movimientos:
+    limite-diario-retiro: 1000
