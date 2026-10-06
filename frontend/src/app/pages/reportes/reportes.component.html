@@ -1,0 +1,73 @@
+<h2>Reportes</h2>
+
+<form class="filtros" [formGroup]="filtros" (ngSubmit)="buscar()">
+  <select formControlName="clienteId">
+    <option value="" disabled>Seleccione un cliente</option>
+    <option *ngFor="let cliente of clientes" [value]="cliente.id">{{ cliente.nombre }}</option>
+  </select>
+  <input type="date" formControlName="fechaInicio">
+  <input type="date" formControlName="fechaFin">
+  <button type="submit" class="boton-primario" [disabled]="cargando">Buscar</button>
+  <button type="button" class="boton-secundario" [disabled]="cargando" (click)="descargarPdf()">Descargar PDF</button>
+</form>
+
+<div class="mensaje-error" *ngIf="mensajeError">{{ mensajeError }}</div>
+
+<ng-container *ngIf="reporte">
+  <h3>Cuentas del cliente</h3>
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th>Numero Cuenta</th>
+        <th>Tipo</th>
+        <th>Saldo Inicial</th>
+        <th>Estado</th>
+        <th>Total Creditos</th>
+        <th>Total Debitos</th>
+        <th>Saldo Disponible</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cuenta of reporte.cuentas">
+        <td>{{ cuenta.numeroCuenta }}</td>
+        <td>{{ cuenta.tipoCuenta }}</td>
+        <td>{{ cuenta.saldoInicial | number:'1.2-2' }}</td>
+        <td>{{ cuenta.estado ? 'True' : 'False' }}</td>
+        <td>{{ cuenta.totalCreditos | number:'1.2-2' }}</td>
+        <td>{{ cuenta.totalDebitos | number:'1.2-2' }}</td>
+        <td>{{ cuenta.saldoDisponible | number:'1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Movimientos del periodo</h3>
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Cliente</th>
+        <th>Numero Cuenta</th>
+        <th>Tipo</th>
+        <th>Saldo Inicial</th>
+        <th>Estado</th>
+        <th>Movimiento</th>
+        <th>Saldo Disponible</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fila of reporte.movimientos">
+        <td>{{ fila['Fecha'] }}</td>
+        <td>{{ fila['Cliente'] }}</td>
+        <td>{{ fila['Numero Cuenta'] }}</td>
+        <td>{{ fila['Tipo'] }}</td>
+        <td>{{ fila['Saldo Inicial'] | number:'1.2-2' }}</td>
+        <td>{{ fila['Estado'] ? 'True' : 'False' }}</td>
+        <td>{{ fila['Movimiento'] | number:'1.2-2' }}</td>
+        <td>{{ fila['Saldo Disponible'] | number:'1.2-2' }}</td>
+      </tr>
+      <tr *ngIf="reporte.movimientos.length === 0">
+        <td colspan="8" class="sin-registros">No hay registros</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>

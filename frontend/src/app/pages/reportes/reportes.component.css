@@ -1,0 +1,17 @@
+.filtros {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.filtros select,
+.filtros input {
+  padding: 8px 10px;
+  border: 1px solid #c9c9c9;
+  border-radius: 3px;
+}
+
+h3 {
+  margin: 22px 0 10px;
+}

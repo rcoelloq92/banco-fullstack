@@ -1,0 +1,96 @@
+<h2>Cuentas</h2>
+
+<div class="mensaje-exito" *ngIf="mensajeExito">{{ mensajeExito }}</div>
+
+<div class="mensaje-error" *ngIf="mensajeError">
+  {{ mensajeError }}
+  <ul *ngIf="detallesError.length">
+    <li *ngFor="let detalle of detallesError">{{ detalle }}</li>
+  </ul>
+</div>
+
+<div class="barra-acciones" *ngIf="!mostrarFormulario">
+  <input class="campo-busqueda" type="text" placeholder="Buscar por número de cuenta o cliente"
+         #busqueda (input)="filtro = busqueda.value">
+  <button type="button" class="boton-primario" (click)="nueva()">Nueva</button>
+</div>
+
+<form class="formulario" *ngIf="mostrarFormulario" [formGroup]="formulario" (ngSubmit)="guardar()">
+  <div class="fila">
+    <label for="numeroCuenta">Número de cuenta</label>
+    <input id="numeroCuenta" type="text" formControlName="numeroCuenta">
+    <span class="error-campo" *ngIf="campoInvalido('numeroCuenta')">El número de cuenta es obligatorio</span>
+  </div>
+
+  <div class="fila">
+    <label for="tipoCuenta">Tipo de cuenta</label>
+    <select id="tipoCuenta" formControlName="tipoCuenta">
+      <option [ngValue]="null" disabled>Seleccione un tipo</option>
+      <option value="AHORRO">Ahorro</option>
+      <option value="CORRIENTE">Corriente</option>
+    </select>
+    <span class="error-campo" *ngIf="campoInvalido('tipoCuenta')">El tipo de cuenta es obligatorio</span>
+  </div>
+
+  <div class="fila">
+    <label for="saldoInicial">Saldo inicial</label>
+    <input id="saldoInicial" type="number" step="0.01" formControlName="saldoInicial">
+    <span class="error-campo" *ngIf="campoInvalido('saldoInicial') && formulario.controls.saldoInicial.hasError('required')">
+      El saldo inicial es obligatorio
+    </span>
+    <span class="error-campo" *ngIf="campoInvalido('saldoInicial') && formulario.controls.saldoInicial.hasError('min')">
+      El saldo inicial no puede ser negativo
+    </span>
+  </div>
+
+  <div class="fila">
+    <label for="estado">Estado</label>
+    <select id="estado" formControlName="estado">
+      <option [ngValue]="true">Activo</option>
+      <option [ngValue]="false">Inactivo</option>
+    </select>
+  </div>
+
+  <div class="fila">
+    <label for="clienteId">Cliente</label>
+    <select id="clienteId" formControlName="clienteId">
+      <option [ngValue]="null" disabled>Seleccione un cliente</option>
+      <option *ngFor="let cliente of clientes" [ngValue]="cliente.id">{{ cliente.nombre }}</option>
+    </select>
+    <span class="error-campo" *ngIf="campoInvalido('clienteId')">El cliente es obligatorio</span>
+  </div>
+
+  <div class="acciones">
+    <button type="submit" class="boton-primario">Guardar</button>
+    <button type="button" class="boton-secundario" (click)="cancelar()">Cancelar</button>
+  </div>
+</form>
+
+<table class="tabla" *ngIf="!mostrarFormulario">
+  <thead>
+    <tr>
+      <th>Número Cuenta</th>
+      <th>Tipo</th>
+      <th>Saldo Inicial</th>
+      <th>Estado</th>
+      <th>Cliente</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cuenta of cuentasFiltradas">
+      <td>{{ cuenta.numeroCuenta }}</td>
+      <td>{{ cuenta.tipoCuenta === 'AHORRO' ? 'Ahorro' : 'Corriente' }}</td>
+      <td>{{ cuenta.saldoInicial | number:'1.2-2' }}</td>
+      <td>{{ cuenta.estado ? 'Activo' : 'Inactivo' }}</td>
+      <td>{{ cuenta.clienteNombre }}</td>
+      <td>
+        <button type="button" class="boton-enlace" (click)="editar(cuenta)">Editar</button>
+        <button type="button" class="boton-peligro" (click)="eliminar(cuenta)">Eliminar</button>
+      </td>
+    </tr>
+    <tr *ngIf="cuentasFiltradas.length === 0">
+      <td class="sin-registros" colspan="6">No hay registros</td>
+    </tr>
+  </tbody>
+</table>

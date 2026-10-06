@@ -1,0 +1,5 @@
+/* Ajustes puntuales del listado; el resto viene de los estilos globales. */
+
+.tabla .boton-enlace {
+  margin-right: 6px;
+}

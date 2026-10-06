@@ -1,0 +1,140 @@
+<h2>Clientes</h2>
+
+@if (mensajeExito) {
+  <div class="mensaje-exito">{{ mensajeExito }}</div>
+}
+
+@if (mensajeError) {
+  <div class="mensaje-error">
+    <div>{{ mensajeError }}</div>
+    @for (detalle of detallesError; track detalle) {
+      <div>{{ detalle }}</div>
+    }
+  </div>
+}
+
+<div class="barra-acciones">
+  <input
+    type="text"
+    class="campo-busqueda"
+    placeholder="Buscar"
+    [formControl]="controlBusqueda">
+  <button type="button" class="boton-primario" (click)="nuevo()">Nuevo</button>
+</div>
+
+@if (formularioVisible) {
+  <form class="formulario" [formGroup]="formulario" (ngSubmit)="guardar()">
+    <div class="fila">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" type="text" formControlName="nombre">
+      @if (campoInvalido('nombre')) {
+        <span class="error-campo">El nombre es obligatorio</span>
+      }
+    </div>
+
+    <div class="fila">
+      <label for="genero">Género</label>
+      <select id="genero" formControlName="genero">
+        <option value="">Seleccione</option>
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
+      </select>
+      @if (campoInvalido('genero')) {
+        <span class="error-campo">El género es obligatorio</span>
+      }
+    </div>
+
+    <div class="fila">
+      <label for="edad">Edad</label>
+      <input id="edad" type="number" formControlName="edad">
+      @if (campoInvalido('edad')) {
+        <span class="error-campo">
+          @if (tieneError('edad', 'required')) {
+            La edad es obligatoria
+          } @else {
+            La edad mínima es 18 años
+          }
+        </span>
+      }
+    </div>
+
+    <div class="fila">
+      <label for="identificacion">Identificación</label>
+      <input id="identificacion" type="text" formControlName="identificacion">
+      @if (campoInvalido('identificacion')) {
+        <span class="error-campo">La identificación es obligatoria</span>
+      }
+    </div>
+
+    <div class="fila">
+      <label for="direccion">Dirección</label>
+      <input id="direccion" type="text" formControlName="direccion">
+    </div>
+
+    <div class="fila">
+      <label for="telefono">Teléfono</label>
+      <input id="telefono" type="text" formControlName="telefono">
+    </div>
+
+    <div class="fila">
+      <label for="clienteId">ClienteId</label>
+      <input id="clienteId" type="text" formControlName="clienteId">
+      @if (campoInvalido('clienteId')) {
+        <span class="error-campo">El clienteId es obligatorio</span>
+      }
+    </div>
+
+    <div class="fila">
+      <label for="contrasena">Contraseña</label>
+      <input id="contrasena" type="password" formControlName="contrasena">
+      @if (campoInvalido('contrasena')) {
+        <span class="error-campo">La contraseña es obligatoria</span>
+      }
+    </div>
+
+    <div class="fila">
+      <label for="estado">Estado</label>
+      <select id="estado" formControlName="estado">
+        <option [ngValue]="true">Activo</option>
+        <option [ngValue]="false">Inactivo</option>
+      </select>
+    </div>
+
+    <div class="acciones">
+      <button type="submit" class="boton-primario">Guardar</button>
+      <button type="button" class="boton-secundario" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+}
+
+<table class="tabla">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Dirección</th>
+      <th>Teléfono</th>
+      <th>ClienteId</th>
+      <th>Estado</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (cliente of filtrados; track cliente.id) {
+      <tr>
+        <td>{{ cliente.nombre }}</td>
+        <td>{{ cliente.direccion }}</td>
+        <td>{{ cliente.telefono }}</td>
+        <td>{{ cliente.clienteId }}</td>
+        <td>{{ cliente.estado ? 'Activo' : 'Inactivo' }}</td>
+        <td>
+          <button type="button" class="boton-enlace" (click)="editar(cliente)">Editar</button>
+          <button type="button" class="boton-peligro" (click)="eliminar(cliente)">Eliminar</button>
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="6" class="sin-registros">No hay registros</td>
+      </tr>
+    }
+  </tbody>
+</table>
